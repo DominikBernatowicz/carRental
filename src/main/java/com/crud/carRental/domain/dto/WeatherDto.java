@@ -14,16 +14,12 @@ public class WeatherDto {
 
     @JsonProperty("stacja")
     private String station;
-
     @JsonProperty("temperatura")
     private String temperature;
-
     @JsonProperty("predkosc_wiatru")
     private String windSpeed;
-
     @JsonProperty("suma_opadu")
     private String totalPrecipitation;
-
     @JsonProperty("cisnienie")
     private String pressure;
 }
