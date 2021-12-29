@@ -14,6 +14,7 @@ public class RentalMapper {
         return new Rental(
                 rentalDto.getId(),
                 rentalDto.getCepikCarId(),
+                rentalDto.getUserId(),
                 rentalDto.getCost(),
                 rentalDto.getRentalDate(),
                 rentalDto.getReturningDate()
@@ -24,6 +25,7 @@ public class RentalMapper {
         return new RentalDto(
                 rental.getId(),
                 rental.getCepikCarId(),
+                rental.getUserId(),
                 rental.getCost(),
                 rental.getRentalDate(),
                 rental.getReturningDate()

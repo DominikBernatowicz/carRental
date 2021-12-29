@@ -11,7 +11,12 @@ import java.util.Optional;
 public interface RentalRepository extends CrudRepository<Rental, Long> {
 
     List<Rental> findAll();
+
     Optional<Rental> findById(Long id);
+
+    List<Rental> findByUserId(Long id);
+
     Rental save(Rental rental);
+
     void deleteById(Long id);
 }

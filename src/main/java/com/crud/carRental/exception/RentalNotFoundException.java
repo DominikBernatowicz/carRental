@@ -1,4 +1,4 @@
 package com.crud.carRental.exception;
 
-public class RentalNotFoundException extends Exception{
+public class RentalNotFoundException extends Exception {
 }

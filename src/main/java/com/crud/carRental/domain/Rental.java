@@ -11,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Rental")
@@ -25,12 +25,9 @@ public class Rental {
     @GeneratedValue
     @Column(name = "id")
     private Long id;
-
     private String cepikCarId;
-
+    private Long userId;
     private BigDecimal cost;
-
-    private Date rentalDate;
-
-    private Date returningDate;
+    private LocalDate rentalDate;
+    private LocalDate returningDate;
 }

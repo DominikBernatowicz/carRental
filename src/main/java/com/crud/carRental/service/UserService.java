@@ -15,9 +15,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
     public List<User> findAll() {
         LOGGER.info("Retrieval of all users. Current list size: " + repository.findAll().size());
@@ -29,7 +29,7 @@ public class UserService {
         return repository.findById(userId);
     }
 
-    public Optional<User> findByLogin(String login) {
+    public Optional<User> findByUsername(String login) {
         LOGGER.info("Retrieval of user. User login: " + login);
         return repository.findByUsername(login);
     }

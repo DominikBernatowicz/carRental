@@ -12,33 +12,31 @@ public class CarMapper {
 
     public Car mapToCar(final CarDto carDto) {
         return new Car(
+                carDto.getId(),
                 carDto.getCepikId(),
                 carDto.getMark(),
                 carDto.getModel(),
                 carDto.getCapacity(),
-                carDto.getRegistration()
+                carDto.getFuel(),
+                carDto.getValue()
         );
     }
 
     public CarDto mapToCarDto(final Car car) {
         return new CarDto(
+                car.getId(),
                 car.getCepikId(),
                 car.getMark(),
                 car.getModel(),
                 car.getCapacity(),
-                car.getRegistration()
+                car.getFuel(),
+                car.getValue()
         );
     }
 
     public List<CarDto> mapToCarDtoList(final List<Car> carList) {
         return carList.stream()
                 .map(this::mapToCarDto)
-                .collect(Collectors.toList());
-    }
-
-    public List<Car> mapToCarList(final List<CarDto> carDtoList) {
-        return carDtoList.stream()
-                .map(this::mapToCar)
                 .collect(Collectors.toList());
     }
 }
