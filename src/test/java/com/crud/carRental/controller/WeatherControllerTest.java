@@ -12,6 +12,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.List;
+
 import static org.mockito.Mockito.when;
 
 @SpringJUnitWebConfig
@@ -25,9 +27,22 @@ class WeatherControllerTest {
     private WeatherService service;
 
     @Test
+    void shouldGetWeather() throws Exception {
+        //Given
+        when(service.fetchWeather()).thenReturn(List.of(new WeatherDto()));
+
+        //When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .get("/weather")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(200));
+    }
+
+    @Test
     void shouldGetWeatherByStation() throws Exception {
         //Given
-        when(service.fetchWeather("test")).thenReturn(new WeatherDto());
+        when(service.fetchWeatherByStation("test")).thenReturn(new WeatherDto());
 
         //When & Then
         mockMvc
