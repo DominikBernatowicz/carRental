@@ -1,5 +1,6 @@
 package com.crud.carRental.service;
 
+import com.crud.carRental.calculations.RentalValueCalculation;
 import com.crud.carRental.domain.Rental;
 import com.crud.carRental.repository.RentalRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +15,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class RentalService {
 
-    private final RentalRepository repository;
     private static final Logger LOGGER = LoggerFactory.getLogger(RentalService.class);
+    private final RentalValueCalculation calculation;
+    private final RentalRepository repository;
 
     public List<Rental> findAll() {
         LOGGER.info("Retrieval of all rentals. Current list size: " + repository.findAll().size());
@@ -27,10 +29,14 @@ public class RentalService {
         return repository.findById(id);
     }
 
+    public List<Rental> findByUserId(Long id) {
+        LOGGER.info("Retrieval of rentals by userId. User id: " + id);
+        return repository.findByUserId(id);
+    }
+
     public Rental save(Rental rental) {
-        //obliczenia wartości + kalkulacja czy wyp.
         LOGGER.info("Create rental. Rental id: " + rental.getId());
-        return repository.save(rental);
+        return repository.save(calculation.calculation(rental));
     }
 
     public void deleteById(Long id) {
