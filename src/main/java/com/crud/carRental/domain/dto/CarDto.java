@@ -1,29 +1,19 @@
 package com.crud.carRental.domain.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-@Data
-@JsonIgnoreProperties(ignoreUnknown = true)
+import java.math.BigDecimal;
+
+@Getter
 @AllArgsConstructor
-@NoArgsConstructor
 public class CarDto {
 
-    @JsonProperty("id")
-    private String cepikId;
-
-    @JsonProperty("marka")
-    private String mark;
-
-    @JsonProperty("model")
-    private String model;
-
-    @JsonProperty("pojemnosc-skokowa-silnika")
-    private String capacity;
-
-    @JsonProperty("data-pierwszej-rejestracji")
-    private String registration;
+    private final Long id;
+    private final String cepikId;
+    private final String mark;
+    private final String model;
+    private final int capacity;
+    private final String fuel;
+    private final BigDecimal value;
 }
