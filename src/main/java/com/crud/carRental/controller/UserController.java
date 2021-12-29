@@ -36,17 +36,17 @@ public class UserController {
         return mapper.mapToUserDtoList(service.findAll());
     }
 
-    @GetMapping(value = "/rent/{userId}")
+    @GetMapping(value = "/id/{userId}")
     public UserDto getUserById(@PathVariable Long userId) throws UserNotFoundException {
         return mapper.mapToUserDto(service.findById(userId).orElseThrow(UserNotFoundException::new));
     }
 
-    @GetMapping(value = "/rent/{login}")
-    public UserDto getUserByLogin(@PathVariable String login) throws UserNotFoundException {
-        return mapper.mapToUserDto(service.findByLogin(login).orElseThrow(UserNotFoundException::new));
+    @GetMapping(value = "/name/{username}")
+    public UserDto getUserByUsername(@PathVariable String username) throws UserNotFoundException {
+        return mapper.mapToUserDto(service.findByUsername(username).orElseThrow(UserNotFoundException::new));
     }
 
-    @DeleteMapping(value = "/rent/{userId}")
+    @DeleteMapping(value = "/{userId}")
     public void deleteUser(@PathVariable Long userId) {
         service.deleteById(userId);
     }

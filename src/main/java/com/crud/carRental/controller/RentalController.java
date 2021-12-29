@@ -36,12 +36,17 @@ public class RentalController {
         return mapper.mapToRentDtoList(service.findAll());
     }
 
-    @GetMapping(value = "/rent/{rentalId}")
-    public RentalDto getRental(@PathVariable Long rentalId) throws RentalNotFoundException {
+    @GetMapping(value = "/user/{userId}")
+    public List<RentalDto> getRentalsByUserId(@PathVariable Long userId) {
+        return mapper.mapToRentDtoList(service.findByUserId(userId));
+    }
+
+    @GetMapping(value = "/{rentalId}")
+    public RentalDto getRentalById(@PathVariable Long rentalId) throws RentalNotFoundException {
         return mapper.mapToRentDto(service.findById(rentalId).orElseThrow(RentalNotFoundException::new));
     }
 
-    @DeleteMapping(value = "/rent/{rentalId}")
+    @DeleteMapping(value = "/{rentalId}")
     public void deleteRental(@PathVariable Long rentalId) {
         service.deleteById(rentalId);
     }
