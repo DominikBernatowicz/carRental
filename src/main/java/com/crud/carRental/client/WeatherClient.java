@@ -11,6 +11,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -21,8 +24,25 @@ public class WeatherClient {
     private final RestTemplate restTemplate;
     private final WeatherConfig config;
 
+    public List<WeatherDto> getWeather() {
+        URI url = UriComponentsBuilder.fromHttpUrl(config.getWeatherApiEndpoint())
+                .build()
+                .encode()
+                .toUri();
+
+        try {
+            WeatherDto[] weatherResponse = restTemplate.getForObject(url, WeatherDto[].class);
+            return Optional.ofNullable(weatherResponse)
+                    .map(Arrays::asList)
+                    .orElse(Collections.emptyList());
+        } catch (RestClientException e) {
+            LOGGER.error(e.getMessage(), e);
+            return Collections.emptyList();
+        }
+    }
+
     public WeatherDto getWeatherByStation(String stationName) {
-        URI url = UriComponentsBuilder.fromHttpUrl(config.getWeatherApiEndpoint() + stationName)
+        URI url = UriComponentsBuilder.fromHttpUrl(config.getWeatherApiEndpoint() + "station/" + stationName)
                 .build()
                 .encode()
                 .toUri();
